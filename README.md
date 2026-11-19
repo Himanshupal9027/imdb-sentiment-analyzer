@@ -11,8 +11,7 @@ A web application built with **Streamlit** and **PyTorch** that classifies movie
 ├── best_lstm_model.pt            # Trained PyTorch model weights (state_dict)
 ├── pipeline_artifacts.json       # Saved model_config, vocab mapping, and max_seq_len
 ├── requirements.txt              # Python dependencies for local and Streamlit Cloud deployment
-├── IMDB_SENTIMENT_ANALYZER.ipynb # Notebook for sentiment model development & evaluation
-└── RNN_Sentiment_analysis.ipynb  # Notebook for RNN/LSTM experiments
+└── IMDB_SENTIMENT_ANALYZER.ipynb # Notebook for sentiment model development & evaluation
 ```
 
 ## 🧠 Functions & Components Explained
