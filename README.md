@@ -2,15 +2,17 @@
 
 A web application built with **Streamlit** and **PyTorch** that classifies movie reviews as **Positive** or **Negative** using a custom **Bidirectional LSTM** neural network trained on IMDB review data.
 
+> **🚀 Live App:** [https://imdb-sentiment-analyzer-gthmz8shme6oq7g9zgcvxy.streamlit.app/](https://imdb-sentiment-analyzer-gthmz8shme6oq7g9zgcvxy.streamlit.app/)
+
 ## 📁 Project Structure
 
 ```text
 ├── app.py                        # Streamlit web app, text preprocessing, and inference pipeline
 ├── best_lstm_model.pt            # Trained PyTorch model weights (state_dict)
 ├── pipeline_artifacts.json       # Saved model_config, vocab mapping, and max_seq_len
+├── requirements.txt              # Python dependencies for local and Streamlit Cloud deployment
 ├── IMDB_SENTIMENT_ANALYZER.ipynb # Notebook for sentiment model development & evaluation
-├── RNN_Sentiment_analysis.ipynb  # Notebook for RNN/LSTM experiments
-└── 02) IMDB Dataset.csv          # IMDB reviews dataset
+└── RNN_Sentiment_analysis.ipynb  # Notebook for RNN/LSTM experiments
 ```
 
 ## 🧠 Functions & Components Explained
@@ -27,7 +29,7 @@ A web application built with **Streamlit** and **PyTorch** that classifies movie
   * Initializes `nn.Embedding` (`padding_idx=0`), `nn.LSTM` (`batch_first=True`), `nn.Dropout`, and the final `nn.Linear(..., 1)` layer.
 * **`forward(self, x)`**:
   * **Parameters:** `x` (`torch.Tensor`) — Batch of padded token index sequences of shape `(batch_size, seq_len)`.
-  * **Returns:** `torch.Tensor` — Raw logits of shape `(batch_size,)` (either concatenating final forward/backward hidden states for bidirectional LSTMs or taking the last layer's hidden state).
+  * **Returns:** `torch.Tensor` — Raw logits of shape `(batch_size,)` (concatenating final forward and backward hidden states for bidirectional LSTMs, or using the final hidden state for unidirectional LSTMs).
 
 ### `load_pipeline()`
 * **Decorator:** `@st.cache_resource`
@@ -53,11 +55,16 @@ A web application built with **Streamlit** and **PyTorch** that classifies movie
 * **Parameters:** `text` (`str`) — Raw movie review entered by the user.
 * **Returns:** Tuple `(sentiment, confidence)` where `sentiment` is `"Positive"` or `"Negative"` (`str`) and `confidence` is a `float` between `0.0` and `1.0`.
 
-## 🚀 Getting Started
+## 🌐 Live Demo
+
+Try the deployed web application directly at:
+**[https://imdb-sentiment-analyzer-gthmz8shme6oq7g9zgcvxy.streamlit.app/](https://imdb-sentiment-analyzer-gthmz8shme6oq7g9zgcvxy.streamlit.app/)**
+
+## 🚀 Running Locally
 
 ### 1. Install Dependencies
 ```bash
-pip install streamlit torch nltk
+pip install -r requirements.txt
 ```
 
 ### 2. Run the Streamlit App
